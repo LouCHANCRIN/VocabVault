@@ -6,11 +6,14 @@ import UserCard from './components/user/UserCard.vue'
 import UserConnection from './components/user/UserConnection.vue'
 
 import { useUserStore } from '@/plugins/store/user.ts'
+import { useAppStore } from '@/plugins/store/app.ts'
 
 const user = useUserStore()
+const app = useAppStore()
 
 onMounted(() => {
   user.checkLoggedIn()
+  document.title = app.name
 })
 </script>
 
@@ -23,7 +26,6 @@ onMounted(() => {
         <UserCard v-if="user.loggedIn"></UserCard>
         <UserConnection v-else></UserConnection>
       </div>
-      <v-btn @click="user.getPosts()">test</v-btn>
       <router-view />
     </v-main>
   </v-app>

@@ -1,7 +1,9 @@
 <script setup>
 import { useUserStore } from '@/plugins/store/user.ts'
 import { useRouter } from 'vue-router'
+import { useAppStore } from '@/plugins/store/app.ts'
 
+const app = useAppStore()
 const user = useUserStore()
 const router = useRouter()
 
@@ -14,7 +16,7 @@ const router = useRouter()
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
   </template>
 
-  <v-app-bar-title>My application</v-app-bar-title>
+  <v-app-bar-title>{{ app.name }}</v-app-bar-title>
 
   <v-spacer></v-spacer>
 
