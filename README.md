@@ -4,17 +4,16 @@ The goal of this application is to help me learn a language like other applicati
 
 The stack is as follow:
 
-
-# Stack
-
 ## Frontend
+
+### Stack
 
 - Vue 3
 - vuetify
 - axios
 - pinia
 
-## Launch
+### Launch
 
 Requirement:
 - install npm
@@ -25,13 +24,15 @@ Commands:
 
 ## Backend
 
+### Stack
+
 - Python3
 - FastAPI
 - SQLAlchemy
 - Pydantic
 - Uvicorn
 
-## Launch
+### Launch
 
 Requirement:
 - Avoir poetry installé sur la machine
