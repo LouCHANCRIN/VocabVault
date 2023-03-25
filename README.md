@@ -1,4 +1,4 @@
-# VocabVault
+# Words Wizard
 
 The goal of this application is to help me learn a language like other applications (Babel, Duolinguo, ...)
 
