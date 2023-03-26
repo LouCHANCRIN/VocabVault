@@ -26,6 +26,7 @@ onMounted(() => {
         <UserCard v-if="user.loggedIn"></UserCard>
         <UserConnection v-else></UserConnection>
       </div>
+
       <router-view />
     </v-main>
   </v-app>
@@ -47,6 +48,7 @@ onMounted(() => {
   background-color: rgb(32, 32, 32);
   height: 93%;
   width: 20%;
+  z-index: 999;
 }
 .scrollable {
   overflow-y: auto
