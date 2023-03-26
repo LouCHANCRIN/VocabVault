@@ -5,13 +5,18 @@ from pydantic import BaseModel, EmailStr
 
 
 class UserLogin(BaseModel):
-    email: EmailStr
+    username: str
     password: str
 
+
+class UserCreate(UserLogin):
+    email: EmailStr
+    
 
 class UserResponse(BaseModel):
     id: int
     email: EmailStr
+    username: str
     created_at: datetime.datetime
 
     class Config:

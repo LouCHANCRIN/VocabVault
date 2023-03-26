@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 
-from ..schemas import UserLogin, UserResponse
+from ..schemas import UserLogin, UserResponse, UserCreate
 from .. import models
 from ..database import get_db
 from ..utils import hash
@@ -15,14 +15,14 @@ router = APIRouter(
 
 
 @router.post('/', status_code=201, response_model=UserResponse)
-def create_user(user: UserLogin, db: Session = Depends(get_db)):
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
     hashed_password = hash(user.password)
     try:
-        user = models.User(email=user.email, password=hashed_password)
+        user = models.User(email=user.email, username=user.username, password=hashed_password, role='admin')
         db.add(user)
         db.commit()
         db.refresh(user)
-    except:
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f'This email address is already used'

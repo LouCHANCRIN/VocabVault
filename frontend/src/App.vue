@@ -3,7 +3,6 @@ import { onMounted } from 'vue'
 
 import appHeader from './components/AppHeader.vue'
 import UserCard from './components/user/UserCard.vue'
-import UserConnection from './components/user/UserConnection.vue'
 
 import { useUserStore } from '@/plugins/store/user.ts'
 import { useAppStore } from '@/plugins/store/app.ts'
@@ -22,9 +21,8 @@ onMounted(() => {
     <v-main class="scrollable">
       <appHeader></appHeader>
        
-      <div v-if="user.showUser" class="user-infos">
-        <UserCard v-if="user.loggedIn"></UserCard>
-        <UserConnection v-else></UserConnection>
+      <div v-if="user.showUser && user.loggedIn" class="user-infos">
+        <UserCard />
       </div>
 
       <router-view />

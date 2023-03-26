@@ -28,7 +28,7 @@ const router = useRouter()
     <v-icon icon="mdi-dots-vertical" />
   </v-btn>
 
-  <v-btn icon @click="user.showUser = !user.showUser">
+  <v-btn icon @click="user.clickIcon()">
     <v-icon icon="mdi-account" />
   </v-btn>
 

@@ -6,8 +6,11 @@ const user = useUserStore()
 
 const env = reactive({
   valid: false,
-  password: '',
-  email: ''
+  signinPassword: '',
+  signinUsername: '',
+  signupPassword: '',
+  signupEmail: '',
+  signupUsername: ''
 })
 
 let emailRules = [
@@ -27,22 +30,20 @@ let emailRules = [
 
 <template>
   <v-card
-  class="mx-auto"
-  variant="outlined"
-  height="100%"
   >
     <v-form v-model="env.valid">
       <br />
       <v-container>
+        SIGN IN
         <v-row>
+
           <v-col
             cols="2"
             md="6"
           >
             <v-text-field
-              v-model="env.email"
-              :rules="emailRules"
-              label="E-mail"
+              v-model="env.signinUsername"
+              label="Username"
               required
             ></v-text-field>
           </v-col>
@@ -52,7 +53,7 @@ let emailRules = [
             md="6"
           >
             <v-text-field
-              v-model="env.password"
+              v-model="env.signinPassword"
               :counter="10"
               label="Password"
               required
@@ -61,13 +62,54 @@ let emailRules = [
         </v-row>
         <v-row>
           <v-col md="6">
-            <v-btn @click="user.logIn(env.email, env.password)">
+            <v-btn @click="user.logIn(env.signinUsername, env.signinPassword)">
               LOGIN
             </v-btn>
           </v-col>
+        </v-row>
+        <br />
+        <br />
+        SIGN UP
+        <v-row>
 
+          <v-col
+            cols="2"
+            md="4"
+          >
+            <v-text-field
+              v-model="env.signupUsername"
+              label="Username"
+              required
+            ></v-text-field>
+          </v-col>
+
+          <v-col
+            cols="2"
+            md="4"
+          >
+            <v-text-field
+              v-model="env.signupEmail"
+              :rules="emailRules"
+              label="E-mail"
+              required
+            ></v-text-field>
+          </v-col>
+
+          <v-col
+            cols="2"
+            md="4"
+          >
+            <v-text-field
+              v-model="env.signupPassword"
+              :counter="10"
+              label="Password"
+              required
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col md="6">
-            <v-btn @click="user.signUp(env.email, env.password)">
+            <v-btn @click="user.signUp(env.signupEmail, env.signupUsername, env.signupPassword)">
               SIGNUP
             </v-btn>
           </v-col>
