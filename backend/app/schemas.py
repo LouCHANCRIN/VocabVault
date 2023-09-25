@@ -5,18 +5,29 @@ from pydantic import BaseModel, EmailStr
 
 
 class UserLogin(BaseModel):
-    email: EmailStr
+    username: str
     password: str
 
+
+class UserCreate(UserLogin):
+    email: EmailStr
+    
 
 class UserResponse(BaseModel):
     id: int
     email: EmailStr
+    username: str
     created_at: datetime.datetime
 
     class Config:
         orm_mode = True
 
+class WordBase(BaseModel):
+    title: str
+    content: str
+
+class CreateWordsResponse(BaseModel):
+    words_inserted: int
 
 class PostBase(BaseModel):
     title: str

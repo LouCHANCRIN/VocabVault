@@ -1,5 +1,6 @@
 import { useApiStore } from './api.ts'
 import { defineStore } from 'pinia'
+import router from '@/plugins/router.ts'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -10,9 +11,12 @@ export const useUserStore = defineStore('user', {
     showUser: false
   }),
   actions: {
-    async signUp (email, password) {
-        const userData = await this.api.post(`/users/`, {email: email, password: password})
-        this.userData = userData
+    async signUp (email, username, password) {
+        const userData = await this.api.post(`/users/`, {email: email, username: username, password: password})
+        if (userData.status === true) {
+          this.userData = userData
+          await this.logIn(username, password)
+        }
     },
     async checkLoggedIn () {
         this.api.addToken()
@@ -26,26 +30,36 @@ export const useUserStore = defineStore('user', {
       }
       return userResponse.status
     },
-    async logIn (email, password) {
+    async logIn (username, password) {
       this.api.useUrlEncoded()
-      const loginResponse = await this.api.post(`/login/`, {username: email, password: password})
+      const loginResponse = await this.api.post(`/login/`, {username: username, password: password})
       this.api.useDefaultInstance()
 
-      if (loginResponse.status == true) {
+      if (loginResponse.status === true) {
         this.loggedIn = true
         localStorage.setItem( 'access_token', loginResponse.data.access_token )
         localStorage.setItem( 'token_type', loginResponse.data.token_type )
         this.api.addToken()
         this.getMyInfos()
+        router.push('/')
       }
     },
     async logOut () {
       this.loggedIn = false
+      this.showUser = false
       localStorage.clear()
     },
     async getPosts () {
       const userData = await this.api.get(`/posts/`)
       this.userData = userData
+    },
+    clickIcon () {
+      if (this.loggedIn === true) {
+        console.log("SWAP SHOW USER VALUE")
+        this.showUser = !this.showUser
+      } else {
+        router.push('/login')
+      }
     }
   }
 })
