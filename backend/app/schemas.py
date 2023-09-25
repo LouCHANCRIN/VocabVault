@@ -22,6 +22,12 @@ class UserResponse(BaseModel):
     class Config:
         orm_mode = True
 
+class WordBase(BaseModel):
+    title: str
+    content: str
+
+class CreateWordsResponse(BaseModel):
+    words_inserted: int
 
 class PostBase(BaseModel):
     title: str

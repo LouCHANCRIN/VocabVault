@@ -6,8 +6,8 @@ const user = useUserStore()
 
 const env = reactive({
   valid: false,
-  signinPassword: '',
-  signinUsername: '',
+  signinPassword: '1234',
+  signinUsername: 'lou',
   signupPassword: '',
   signupEmail: '',
   signupUsername: ''
