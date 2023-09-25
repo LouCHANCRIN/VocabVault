@@ -27,6 +27,7 @@ export const useUserStore = defineStore('user', {
 
       if (userResponse.status === true) {
         this.userData = userResponse.data
+        console.log(userResponse.data)
       }
       return userResponse.status
     },
@@ -47,6 +48,7 @@ export const useUserStore = defineStore('user', {
     async logOut () {
       this.loggedIn = false
       this.showUser = false
+      this.userData = null
       localStorage.clear()
     },
     async getPosts () {

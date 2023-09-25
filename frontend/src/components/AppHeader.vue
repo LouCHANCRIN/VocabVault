@@ -24,6 +24,10 @@ const router = useRouter()
     <v-icon icon="mdi-home" />
   </v-btn>
 
+  <v-btn v-if="user?.userData?.role == 'admin'" icon @click="app.loadData()">
+    <v-icon icon="mdi-database-arrow-up" />
+  </v-btn>
+
   <v-btn icon>
     <v-icon icon="mdi-dots-vertical" />
   </v-btn>

@@ -29,10 +29,11 @@ def check_words(db: Session = Depends(get_db), current_user: int = Depends(oauth
     with open("./data/Chinese All Characters (Merged).csv", 'r') as file:
         csvreader = csv.reader(file)
         count = 0
+        words = []
         for row in csvreader:
             if count > 0:
                 row[2] = row[2].replace(" ", ",").replace(" ", ",")
-                word = models.Word(
+                words.append(models.Word(
                     radical = row[2],
                     frequency = int(row[3]) if row[3] != "" else 0,
                     general_standard = int(row[4]) if row[4] != "" else 0,
@@ -46,10 +47,11 @@ def check_words(db: Session = Depends(get_db), current_user: int = Depends(oauth
                     pinyin2 = row[12],
                     tone = row[13],
                     meaning = row[14],
-                )
-                db.add(word)
-                db.commit()
-                db.refresh(word)
-
+                ))
             count += 1
+
+    for word in words:
+        db.add(word)
+        db.commit()
+        db.refresh(word)
     return {"words_inserted": count - 1}
