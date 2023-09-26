@@ -6,9 +6,8 @@ const user = useUserStore()
 
 <template>
   <v-card
-  class="mx-auto"
-  variant="outlined"
-  height="100%"
+    variant="outlined"
+    height="100%"
   >
     <v-card-item>
       <div>

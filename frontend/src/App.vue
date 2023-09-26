@@ -21,9 +21,15 @@ onMounted(() => {
     <v-main class="scrollable">
       <appHeader></appHeader>
        
-      <div v-if="user.showUser && user.loggedIn" class="user-infos">
+      <v-navigation-drawer
+        v-model="user.showUser"
+        location="right"
+        temporary
+        class="user-infos"
+        style="background: rgb(32, 32, 32);"
+      >
         <UserCard />
-      </div>
+      </v-navigation-drawer>
 
       <router-view />
     </v-main>
@@ -39,14 +45,6 @@ onMounted(() => {
   /* color: #2c3e50; */
   color: #1585f5;
   /* color: #f51515; */
-}
-.user-infos {
-  position:fixed;
-  right: 0;
-  background-color: rgb(32, 32, 32);
-  height: 93%;
-  width: 20%;
-  z-index: 999;
 }
 .scrollable {
   overflow-y: auto
