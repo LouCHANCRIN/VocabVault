@@ -8,9 +8,9 @@ const env = reactive({
   valid: false,
   signinPassword: '1234',
   signinUsername: 'lou',
-  signupPassword: '',
-  signupEmail: '',
-  signupUsername: ''
+  signupPassword: '1234',
+  signupEmail: 'lou@email.com',
+  signupUsername: 'lou'
 })
 
 let emailRules = [

@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, Response, status, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from typing import List, Optional
 import csv
 import datetime
 
-
-from ..schemas import PostBase, PostResponse, CreateWordsResponse
+from ..schemas import PostBase, PostResponse, CreateWordsResponse, WordResponse
 from .. import models, oauth2
 from ..database import get_db
 
@@ -24,8 +24,36 @@ def insert_word(db: Session = Depends(get_db), current_user: int = Depends(oauth
     db.refresh(post)
     return post
 
+@router.get('/get_flashcards', status_code=200, response_model=List[WordResponse])
+def get_flashcards(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+    words_data = db.query(models.Word).where(models.Word.meaning != "").order_by(func.random()).limit(9).all()
+    words_list = [word.__dict__ for word in words_data]
+
+    if not words_list:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f'No word found in database'
+        )
+
+    for word in words_list:
+        word.update({"show_translation": False})
+    return words_list
+
+@router.get('/get_words', status_code=200, response_model=List[WordResponse])
+def get_word(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+    words_data = db.query(models.Word).order_by(func.random()).limit(9).all()
+    words_list = [word.__dict__ for word in words_data]
+
+    if not words_list:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f'No word found in database'
+        )
+    return words_list
+
 @router.get('/check_words', status_code=201, response_model=CreateWordsResponse)
 def check_words(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+    print("Uploading words to database")
     with open("./data/Chinese All Characters (Merged).csv", 'r') as file:
         csvreader = csv.reader(file)
         count = 0
@@ -54,4 +82,5 @@ def check_words(db: Session = Depends(get_db), current_user: int = Depends(oauth
         db.add(word)
         db.commit()
         db.refresh(word)
+
     return {"words_inserted": count - 1}
