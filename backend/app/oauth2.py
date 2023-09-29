@@ -13,7 +13,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
 SECRET_KEY = config("secret")
 ALGORITHM = config("algorithm")
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 10080
 
 
 def create_access_token(data: dict):
