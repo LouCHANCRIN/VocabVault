@@ -15,8 +15,8 @@ async function getNewFlashcards() {
 }
 </script>
 
-<template>
-  <v-btn @click="getNewFlashcards()" style="border: solid; margin-top: 5px;">Get new flashcards</v-btn>
+<template color="primary">
+  <v-btn @click="getNewFlashcards()" style="border: solid; margin-top: 5px; color: rgb(var(--v-theme-primary));">Get new flashcards</v-btn>
   <v-container>
     <v-item-group
       multiple
@@ -27,10 +27,11 @@ async function getNewFlashcards() {
           :key="word"
           class="flashcard"
           @click="word.show_translation = !word.show_translation"
+          style="color: rgb(var(--v-theme-primary))"
         >
             <div class="text-h6 mb-1">{{ word.pinyin }}</div>
             <div class="text-h6 mb-1">{{ word.character }}</div>
-            <v-icon :icon="word.show_translation ? 'mdi-eye-off' : 'mdi-eye'"></v-icon>
+            <v-icon :icon="word.show_translation ? 'mdi-eye-off' : 'mdi-eye'"/>
             <div v-if="word.show_translation" class="text-h6 mb-1">{{ word.meaning }}</div>
 
         </v-col>
@@ -38,6 +39,7 @@ async function getNewFlashcards() {
     </v-item-group>
   </v-container>
 </template>
+
 <style scoped>
 .flashcard {
   border: solid;

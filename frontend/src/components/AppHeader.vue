@@ -1,38 +1,39 @@
 <script setup>
-import { useUserStore } from '@/plugins/store/user.ts'
 import { useRouter } from 'vue-router'
+
+import { useUserStore } from '@/plugins/store/user.ts'
 import { useAppStore } from '@/plugins/store/app.ts'
+
+const router = useRouter()
 
 const app = useAppStore()
 const user = useUserStore()
-const router = useRouter()
-
 </script>
 
 <template>
-  <v-app-bar class="app-bar">
+  <v-app-bar class="app-bar" color="app-header" style="outline-color: rgb(var(--v-theme-primary));">
 
     <template v-slot:prepend>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon color="primary"/>
     </template>
 
-    <v-app-bar-title>{{ app.name }}</v-app-bar-title>
+    <v-app-bar-title style="color: rgb(var(--v-theme-primary));">{{ app.name }}</v-app-bar-title>
 
     <v-spacer></v-spacer>
 
-    <v-btn icon @click="router.push('/')">
+    <v-btn icon @click="router.push('/')" color="primary">
       <v-icon icon="mdi-home" />
     </v-btn>
 
-    <v-btn v-if="user?.userData?.role == 'admin'" icon @click="app.loadData()">
+    <v-btn v-if="user?.userData?.role == 'admin'" icon @click="app.loadData()" color="primary">
       <v-icon icon="mdi-database-arrow-up" />
     </v-btn>
 
-    <v-btn icon>
+    <v-btn icon @click="app.changeTheme(app.theme == 'defaultTheme' ? 'lightTheme' : 'defaultTheme')" color="primary">
       <v-icon icon="mdi-dots-vertical" />
     </v-btn>
 
-    <v-btn icon @click="user.clickIcon()">
+    <v-btn icon @click="user.clickIcon()" color="primary">
       <v-icon icon="mdi-account" />
     </v-btn>
 
@@ -42,7 +43,6 @@ const router = useRouter()
 
 <style scoped>
 .app-bar {
-  background-color: #222222 !important;
   outline: 1px solid;
 }
 </style>

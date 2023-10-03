@@ -3,9 +3,6 @@ import App from './App.vue'
 import { createPinia } from 'pinia'
 
 import router from './plugins/router.ts'
-
-import './assets/css/common.css'
-
 import vuetify from './plugins/vuetify.ts'
 
 createApp(App)

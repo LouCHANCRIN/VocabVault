@@ -1,8 +1,10 @@
 <script setup>
 import { onMounted } from 'vue'
+import { useTheme } from 'vuetify'
 
 import appHeader from './components/AppHeader.vue'
 import UserCard from './components/user/UserCard.vue'
+import UserConnection from './components/user/UserConnection.vue'
 
 import { useUserStore } from '@/plugins/store/user.ts'
 import { useAppStore } from '@/plugins/store/app.ts'
@@ -14,24 +16,25 @@ onMounted(() => {
   user.checkLoggedIn()
   document.title = app.name
 })
+console.log(useTheme().current.value.colors)
 </script>
 
 <template>
-  <v-app class="app">
+  <v-app class="app" :theme="app.theme">
     <v-main class="scrollable">
-      <appHeader></appHeader>
-       
+      <appHeader/>
+
       <v-navigation-drawer
         v-model="user.showUser"
         location="right"
         temporary
-        class="user-infos"
-        style="background: rgb(32, 32, 32);"
+        style="width: 400px; outline: 1px solid; outline-color: rgb(var(--v-theme-primary)); background-color: rgb(var(--v-theme-app-header)); color: rgb(var(--v-theme-primary));"
       >
-        <UserCard />
+        <UserCard v-if="user.loggedIn"/>
+        <UserConnection v-else/>
       </v-navigation-drawer>
 
-      <router-view />
+      <router-view/>
     </v-main>
   </v-app>
 </template>
@@ -42,9 +45,6 @@ onMounted(() => {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* color: #2c3e50; */
-  color: #1585f5;
-  /* color: #f51515; */
 }
 .scrollable {
   overflow-y: auto
