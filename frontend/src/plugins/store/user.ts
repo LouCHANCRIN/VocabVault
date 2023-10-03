@@ -1,6 +1,5 @@
 import { useApiStore } from './api.ts'
 import { defineStore } from 'pinia'
-import router from '@/plugins/router.ts'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -12,16 +11,16 @@ export const useUserStore = defineStore('user', {
   }),
   actions: {
     async signUp (email, username, password) {
-        const userData = await this.api.post(`/users/`, {email: email, username: username, password: password})
-        if (userData.status === true) {
-          this.userData = userData
-          await this.logIn(username, password)
-        }
+      const userData = await this.api.post(`/users/`, {email: email, username: username, password: password})
+      if (userData.status === true) {
+        this.userData = userData
+        await this.logIn(username, password)
+      }
     },
     async checkLoggedIn () {
-        this.api.addToken()
-        this.loggedIn = await this.getMyInfos()
-      },
+      this.api.addToken()
+      this.loggedIn = await this.getMyInfos()
+    },
     async getMyInfos () {
       const userResponse = await this.api.get(`/me`)
 
@@ -42,12 +41,11 @@ export const useUserStore = defineStore('user', {
         localStorage.setItem( 'token_type', loginResponse.data.token_type )
         this.api.addToken()
         this.getMyInfos()
-        router.push('/')
+        this.showUser = !this.showUser
       }
     },
     async logOut () {
       this.loggedIn = false
-      this.showUser = false
       this.userData = null
       localStorage.clear()
     },
@@ -56,12 +54,7 @@ export const useUserStore = defineStore('user', {
       this.userData = userData
     },
     clickIcon () {
-      if (this.loggedIn === true) {
-        console.log("SWAP SHOW USER VALUE")
-        this.showUser = !this.showUser
-      } else {
-        router.push('/login')
-      }
+      this.showUser = !this.showUser
     }
   }
 })

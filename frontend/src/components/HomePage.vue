@@ -83,6 +83,7 @@ const gameMods = [
           width="320"
           @click="router.push(mod.redirect)"
           variant="outlined"
+          color="primary"
         >
         
           <v-img
