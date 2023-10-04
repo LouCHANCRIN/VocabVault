@@ -6,55 +6,55 @@ const router = useRouter()
 const gameMods = [
   {
     name: "Flash Cards",
-    src: require('../assets/logo.jpg'),
-    description: "Flash cards description",
+    src: require('../assets/modImages/flashCardMod.jpg'),
+    description: "Flash cards are used to help with long term memorization. The cards first display the character and the pinyin and when clicked, the translation is showed to the user. To use them, you have to first look at the character and pinyin, then guess he meaning of it. Finally, by clickng the card, you get the meaning of the word which give you a feedback that will help you memorize the words.",
     redirect: '/FlashCards'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image1.jpg'),
     description: "Mod description",
     redirect: '/ModRoute'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image2.png'),
     description: "Mod description",
     redirect: '/ModRoute'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image3.jpg'),
     description: "Mod description",
     redirect: '/ModRoute'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image4.jpg'),
     description: "Mod description",
     redirect: '/ModRoute'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image5.jpg'),
     description: "Mod description",
     redirect: '/ModRoute'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image6.jpg'),
     description: "Mod description",
     redirect: '/ModRoute'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image7.jpg'),
     description: "Mod description",
     redirect: '/ModRoute'
   },
   {
     name: "TBD mod",
-    src: require('../assets/logo.jpg'),
+    src: require('../assets/modImages/image8.jpg'),
     description: "Mod description",
     redirect: '/ModRoute'
   }
